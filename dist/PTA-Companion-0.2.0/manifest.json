@@ -1,0 +1,70 @@
+{
+  "manifest_version": 3,
+  "name": "PTA Companion",
+  "version": "0.2.0",
+  "description": "展示 PTA 编程题、测试点摘要、判题结果，并由用户显式提交。",
+  "minimum_chrome_version": "111",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "action": {
+    "default_title": "Start PTA Companion",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://pintia.cn/*",
+    "https://www.pintia.cn/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://pintia.cn/*",
+        "https://www.pintia.cn/*"
+      ],
+      "js": [
+        "src/protocol.js",
+        "src/page-bridge.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://pintia.cn/*",
+        "https://www.pintia.cn/*"
+      ],
+      "js": [
+        "src/protocol.js",
+        "src/content.js"
+      ],
+      "run_at": "document_start",
+      "world": "ISOLATED"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "src/content.css"
+      ],
+      "matches": [
+        "https://pintia.cn/*",
+        "https://www.pintia.cn/*"
+      ]
+    }
+  ]
+}

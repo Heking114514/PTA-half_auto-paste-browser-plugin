@@ -1,0 +1,9 @@
+{
+  "name": "pta-mv3-companion",
+  "version": "0.2.0",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/protocol.test.js tests/manifest.test.js tests/background.test.js",
+    "test:browser": "node tests/cdp-smoke.js"
+  }
+}
